@@ -27,7 +27,7 @@ $(document).ready(function($) {
 /* Flickr photos */
 
     var apiUrl = 'http://api.flickr.com/services/rest/?';
-    var apiKey = 'e9d8174a79c782745289969a45d350e8';
+    var apiKey = 'bf4bce183f802121fef6f14c6c78ab08';
     var flag = 0;
     
     $.getJSON( apiUrl, { 'nojsoncallback': 1, 'method': 'flickr.tags.getClusterPhotos', 'api_key': apiKey,'tag': 'travel', 'cluster_id': 'sky-sea-blue', 'format': 'json' }, function( data ){
@@ -36,7 +36,9 @@ $(document).ready(function($) {
                             function( data ){
                                 if( data.photo ){
                                     var image_url='http://farm' + data.photo.farm + '.staticflickr.com/' + data.photo.server +'/'+ data.photo.id +'_' + data.photo.secret + '_b.jpg';
-                                    setTimeout(function(){$('body').attr("background",image_url)}, 5000*i);
+                                    if(i<10){
+                                        $('#images').append('<span><img src="' + image_url + '"></span>');
+                                    }
                                 }
                             }    
                         );
